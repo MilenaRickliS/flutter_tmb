@@ -9,11 +9,13 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(title: 'Calculadora TMB', home: TelaPrincipal());
+    return MaterialApp(title: 'Calculadora TMB', home: TelaPrincipal(),  debugShowCheckedModeBanner: false,);    
   }
 }
 
 class TelaPrincipal extends StatefulWidget {
+  const TelaPrincipal({super.key});
+
   @override
   _TelaPrincipalState createState() => _TelaPrincipalState();
 }
@@ -86,7 +88,7 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
 
             Row(
               children:[
-                Text('Feminino'),
+                Text('Masculino'),
                 Switch(
                   value: _isMulher,
                   onChanged: (value) {
@@ -95,7 +97,8 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
                     });
                   },
                 ),
-                Text('Masculino'),
+                Text('Feminino'),              
+                
 
               ],
             ),
@@ -107,4 +110,27 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
       ),
     );
   }
+}
+
+class TelaResultado extends StatelessWidget{
+  final double? tmb;
+
+  TelaResultado({super.key, required this.tmb});
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Resultado'),
+      ),
+      body: Padding(
+        padding: EdgeInsets.all(16),
+        child: Center(
+          child: Text(
+            'Sua Taxa Metabólica Basal é: ${tmb?.toStringAsFixed(2)} kcal/dia',
+            style: TextStyle(fontSize: 24),
+          ),
+        ),
+      ),
+    );
+  } 
 }
